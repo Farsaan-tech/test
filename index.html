@@ -100,20 +100,103 @@
       overflow: hidden;
     }
     .hero::before{
-      content:""; position:absolute; inset:auto auto -120px -120px; width:520px; height:520px;
-      background: radial-gradient(closest-side, rgba(238,0,0,.65), rgba(238,0,0,.25), transparent 60%);
-      filter: blur(20px); opacity:.9;
+      content:""; position:absolute; inset:auto auto -160px -160px; width:640px; height:640px;
+      background: radial-gradient(closest-side, rgba(238,0,0,.70), rgba(238,0,0,.28), transparent 62%);
+      filter: blur(24px); opacity:.9;
       animation: blobMorph 14s ease-in-out infinite;
       border-radius: 38% 62% 45% 55% / 55% 35% 65% 45%;
       z-index:0;
     }
     @keyframes blobMorph {
       0%   { transform: translate(0,0) scale(1); border-radius: 38% 62% 45% 55% / 55% 35% 65% 45%; }
+      33%  { transform: translate(40px,-20px) scale(1.08); border-radius: 55% 45% 60% 40% / 40% 60% 35% 65%; }
+      66%  { transform: translate(-30px,40px) scale(0.95); border-radius: 45% 55% 38% 62% / 60% 40% 55% 45%; }
+      100% { transform: translate(0,0) scale(1); border-radius: 38% 62% 45% 55% / 55% 35% 65% 45%; }
+    }
       33%  { transform: translate(40px,-20px) scale(1.05); border-radius: 55% 45% 60% 40% / 40% 60% 35% 65%; }
       66%  { transform: translate(-20px,30px) scale(0.95); border-radius: 45% 55% 38% 62% / 60% 40% 55% 45%; }
       100% { transform: translate(0,0) scale(1); border-radius: 38% 62% 45% 55% / 55% 35% 65% 45%; }
     }
-    .hero h1 { font-size: clamp(2.2rem, 4.2vw, 3.2rem); font-weight: 800; color: #ffffff; position: relative; z-index:1; }
+    .hero::after{
+      content:""; position:absolute; inset:-220px -260px auto auto; width:980px; height:980px;
+      background: radial-gradient(closest-side, rgba(238,0,0,.75), rgba(238,0,0,.32), transparent 70%);
+      filter: blur(34px); opacity:1;
+      animation: blobMorphRight 18s ease-in-out infinite reverse;
+      border-radius: 55% 45% 62% 38% / 45% 60% 40% 55%;
+      z-index:0;
+    }
+    @keyframes blobMorphRight {
+      0%   { transform: translate(0,0) scale(1); }
+      50%  { transform: translate(-30px,25px) scale(1.06); }
+      100% { transform: translate(0,0) scale(1); }
+    }
+    .hero h1 {
+  position: relative;
+}
+.hero h1::after{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  bottom:-14px;
+  width:80%; height:26px;
+  background: radial-gradient(circle, rgba(238,0,0,.62), rgba(238,0,0,.22), transparent 70%);
+  filter: blur(22px);
+  opacity:0.9;
+  pointer-events:none;
+}i
+.hero h1 {
+  position: relative;
+}
+.hero h1::after{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  bottom:-6px;
+  width:60%; height:14px;
+  background: radial-gradient(circle, rgba(238,0,0,.55), rgba(238,0,0,.15), transparent);
+  filter: blur(18px);
+  pointer-events:none;
+}
+.hero h1 {
+  position: relative;
+}
+.hero h1::after{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  bottom:-6px;
+  width:60%; height:14px;
+  background: radial-gradient(circle, rgba(238,0,0,.55), rgba(238,0,0,.15), transparent);
+  filter: blur(18px);
+  pointer-events:none;
+}
+.hero h1 {
+  position: relative;
+}
+.hero h1::after{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  bottom:-6px;
+  width:60%; height:14px;
+  background: radial-gradient(circle, rgba(238,0,0,.55), rgba(238,0,0,.15), transparent);
+  filter: blur(18px);
+  pointer-events:none;
+}
+.hero h1 {
+  position: relative;
+}
+.hero h1::after{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  bottom:-6px;
+  width:60%; height:14px;
+  background: radial-gradient(circle, rgba(238,0,0,.55), rgba(238,0,0,.15), transparent);
+  filter: blur(18px);
+  pointer-events:none;
+}
+.hero h1 { font-size: clamp(2.2rem, 4.2vw, 3.2rem); font-weight: 800; color: #ffffff; position: relative; z-index:1; }
     .hero img{ width:340px; max-width: 40vw; border-radius:14px; object-fit:cover; border: 8px solid var(--card);
       box-shadow: 0 10px 24px rgba(0,0,0,.35); position: relative; z-index:1;}
     .hero .text-content p{ color:#f1f5f9; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
@@ -760,192 +843,4 @@
   <!-- Floating Action Buttons -->
   <div class="fab">
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contactModal" title="Quick Contact"><i class="fa-regular fa-message"></i></button>
-    <a href="#home" class="btn btn-outline-secondary" title="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
-  </div>
-
-  <!-- Contact Modal -->
-  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" style="border-radius: 16px;">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel"><i class="fa-regular fa-paper-plane me-2"></i>Contact Me</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="contactForm">
-            <div class="mb-3">
-              <label class="form-label">Your Name</label>
-              <input type="text" class="form-control" name="name" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Your Email</label>
-              <input type="email" class="form-control" name="email" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Message</label>
-              <textarea class="form-control" name="message" rows="4" required></textarea>
-            </div>
-            <div class="d-grid">
-              <button class="btn btn-primary" type="submit">Send</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast (success) -->
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
-    <div id="sentToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <i class="fa-regular fa-circle-check me-2"></i>
-        <strong class="me-auto">Message ready</strong>
-        <small>now</small>
-        <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">Your email app will open with the message pre‑filled. Review & send!</div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // ===== Utilities =====
-    function updateProgress(){
-      const h = document.documentElement;
-      const scrolled = h.scrollTop || document.body.scrollTop || 0;
-      const height = Math.max(1, (h.scrollHeight - h.clientHeight));
-      const pct = Math.min(100, Math.max(0, (scrolled / height) * 100));
-      const bar = document.getElementById('progressBar');
-      if(bar) bar.style.width = pct + '%';
-    }
-    window.addEventListener('scroll', updateProgress);
-    updateProgress();
-
-    // ===== Theme =====
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    function applyTheme(theme){
-      const dark = theme === 'dark';
-      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
-      if (themeIcon){ themeIcon.className = dark ? 'fa-solid fa-sun shimmer' : 'fa-solid fa-moon shimmer'; }
-      const nav = document.querySelector('nav.navbar');
-      if (nav){ nav.classList.toggle('navbar-dark', dark); nav.classList.toggle('navbar-light', !dark); }
-    }
-    const saved = localStorage.getItem('theme') || 'dark';
-    applyTheme(saved);
-    function toggleTheme(){
-      const current = document.documentElement.getAttribute('data-theme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('theme', next); applyTheme(next);
-    }
-    themeToggle?.addEventListener('click', (e)=>{ e.preventDefault(); toggleTheme(); });
-    themeIcon?.addEventListener('click', (e)=>{ e.preventDefault(); toggleTheme(); });
-    window.addEventListener('keydown', (e)=>{ if((e.key||'').toLowerCase()==='t') toggleTheme(); });
-
-    // ===== Spotlight follow-cursor (projects, skills, certs) =====
-    (function(){
-      const targets = document.querySelectorAll('.project-card, .skill-icon, .cert-card');
-      targets.forEach(el => {
-        el.addEventListener('pointermove', (e) => {
-          const r = el.getBoundingClientRect();
-          const x = ((e.clientX - r.left) / r.width) * 100;
-          const y = ((e.clientY - r.top) / r.height) * 100;
-          el.style.setProperty('--mx', x.toFixed(2) + '%');
-          el.style.setProperty('--my', y.toFixed(2) + '%');
-        });
-        el.addEventListener('pointerleave', () => {
-          el.style.removeProperty('--mx');
-          el.style.removeProperty('--my');
-        });
-      });
-    })();
-
-    // ===== Hero Terminal (single-line demo + commands) =====
-    const termOut = document.getElementById('term-output');
-    const termIn  = document.getElementById('term-input');
-    const demoEl  = document.getElementById('demo-line');
-
-    const startTs = Date.now();
-    const pad = (n)=> String(n).padStart(2,'0');
-    const uptimeStr = ()=>{
-      const s = Math.floor((Date.now()-startTs)/1000);
-      const hh = pad(Math.floor(s/3600));
-      const mm = pad(Math.floor((s%3600)/60));
-      const ss = pad(s%60);
-      return `${hh}:${mm}:${ss}`;
-    };
-
-    function print(html){
-      const d = document.createElement('div'); d.innerHTML = html; termOut.appendChild(d); termOut.scrollTop = termOut.scrollHeight; return d;
-    }
-
-    const demoCmds = [
-      () => `terraform plan -refresh=false`,
-      () => `az vm list -o table`,
-      () => `az network vnet list -o table`,
-      () => `ip -br addr`,
-      () => `ip route`,
-      () => `terraform fmt -check`,
-      () => `az account show --query user.name`,
-    ];
-    let demoIdx = 0; let demoPaused = false; let mode = 'type'; let cursor = 0; let currentText = '';
-    function loop(){
-      if(!demoPaused){
-        if(mode==='type'){
-          if(cursor===0){ currentText = demoCmds[demoIdx % demoCmds.length](); }
-          cursor++; demoEl.textContent = currentText.slice(0,cursor);
-          if(cursor >= currentText.length){ mode='hold'; setTimeout(()=>{ mode='erase'; }, 900); }
-        } else if(mode==='erase'){
-          cursor--; demoEl.textContent = currentText.slice(0,Math.max(0,cursor));
-          if(cursor<=0){ mode='type'; demoIdx++; }
-        }
-      }
-      setTimeout(loop, mode==='erase' ? 16 : 28);
-    }
-    loop();
-
-    const commands = {
-      help(){ print('available: <code>help</code>, <code>terraform</code>, <code>azure</code>, <code>net</code>, <code>uptime</code>, <code>theme</code>, <code>clear</code>'); },
-      terraform(){ print(`<pre><code>Terraform v1.6.6
-Initializing the backend...
-Plan: 2 to add, 0 to change, 0 to destroy.
-  + oci_core_vcn.main
-  + oci_core_instance.web[0]</code></pre>`); },
-      azure(){ print(`<pre><code>$ az vm list -o table
-Name         ResourceGroup   Location   PowerState
-web-01       prod-rg         eastus     VM running
-bastion-01   net-rg          eastus     VM deallocated</code></pre>`); },
-      net(){ print(`<pre><code>$ ip -br addr
-eth0    UP   10.0.1.10/24
-lo      UP   127.0.0.1/8
-
-$ ip route
-default via 10.0.1.1 dev eth0
-10.0.1.0/24 dev eth0 proto kernel scope link src 10.0.1.10</code></pre>`); },
-      uptime(){ print(`uptime: <strong>${uptimeStr()}</strong>`); },
-      theme(){ toggleTheme(); print('theme toggled'); },
-      clear(){ termOut.innerHTML = `<div class=\"d-flex\" style=\"gap:8px; padding:8px 12px;\"><span class=\"text-danger\">$</span>&nbsp;<span id=\"demo-line\"></span></div>`; },
-    };
-
-    let resumeTimer = null;
-    function pauseDemo(){ demoPaused = true; if(resumeTimer) clearTimeout(resumeTimer); }
-    function resumeDemo(){ demoPaused = false; }
-
-    termIn?.addEventListener('keydown', (e)=>{
-      if(e.key==='Enter'){
-        const raw = termIn.value.trim(); if(!raw) return;
-        pauseDemo();
-        termOut.insertAdjacentHTML('beforeend', `<div><span class='text-danger'>$</span> ${raw}</div>`);
-        const [cmd, ...rest] = raw.split(' ');
-        (commands[cmd]?.(rest.join(' '))) ?? print(`command not found: <code>${cmd}</code>`);
-        termIn.value='';
-        resumeTimer = setTimeout(resumeDemo, 6000);
-      } else { pauseDemo(); resumeTimer = setTimeout(resumeDemo, 6000); }
-    });
-
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+    <a href="#home" class="btn btn-outline-secondary" 
