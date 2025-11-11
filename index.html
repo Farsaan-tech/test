@@ -13,17 +13,17 @@
 
   <style>
     :root {
-      /* Red Hat inspired light theme */
-      --bg: #f5f5f7;
+      /* Light theme */
+      --bg: linear-gradient(180deg, #eef3ff 0%, #f6f9ff 55%, #ffffff 100%);
       --card: rgba(255,255,255,0.75);
       --card-2: rgba(250,250,252,0.6);
       --text: #1e1e1e;
       --muted: #6b7280;
-      --brand-red: #0033cc; /* Red Hat Red */
+      --brand-red: #0033cc; /* using blue palette per your change */
       --brand-red-2: #477aff;
       --black: #0a0f1f;
       --accent: #ffb199;
-      --ring: rgba(238, 0, 0, .35);
+      --ring: rgba(0, 51, 204, .35);
       --shadow: 0 12px 30px rgba(0,0,0,.12);
     }
     [data-theme="dark"] {
@@ -36,7 +36,7 @@
       --brand-red-2: #477aff;
       --black: #0a0f1f;
       --accent: #ff9aa2;
-      --ring: rgba(255, 77, 77, .55);
+      --ring: rgba(0, 102, 255, .55);
       --shadow: 0 24px 48px rgba(0,0,0,.85);
     }
 
@@ -44,35 +44,25 @@
     body {
       font-family: 'Montserrat', sans-serif;
       color: var(--text);
-      background-color: var(--bg);
+      background: var(--bg);
       padding-bottom: 80px;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* remove doodle/bg texture in both themes */
     .doodle{ display:none !important; }
 
     /* progress bar */
     #progressBar{ position: fixed; left:0; top:0; height:4px; width:0; background: var(--brand-red); z-index: 2000; box-shadow: 0 0 8px rgba(0,51,204,.6); transition: width .08s linear; }
 
-    /* section heading + red underline */
-    .section-header{ position:relative; margin-bottom:20px; font-family:'Oswald', sans-serif; font-size: clamp(1.9rem, 3.6vw, 2.4rem); font-weight:900; letter-spacing:.2px; color: var(--text); }
+    /* headings */
+    .section-header{ animation: heroGlow 6s ease-in-out infinite alternate; position:relative; margin-bottom:20px; font-family:'Oswald', sans-serif; font-size: clamp(1.9rem, 3.6vw, 2.4rem); font-weight:900; letter-spacing:.2px; color: var(--text); }
     .section-header::after{ content:""; display:block; width:84px; height:4px; margin:12px auto 0; border-radius:999px; background: var(--brand-red); }
-    [data-theme="light"] .section-header{ color:#0a0a0a !important; }
+    @keyframes heroGlow{ from{ text-shadow: 0 0 8px rgba(0,51,204,0.35);} to{ text-shadow: 0 0 18px rgba(0,51,204,0.85);} }
 
-    /* unify section backgrounds */
-    #technical-skills, #certifications, #professional-experience, #projects, #about { background: var(--bg) !important; }
-    [data-theme="dark"] section { border-bottom: 1px solid rgba(0,51,204,0.22) !important; }
-    [data-theme="dark"] #technical-skills,
-    [data-theme="dark"] #certifications,
-    [data-theme="dark"] #professional-experience,
-    [data-theme="dark"] #projects,
-    [data-theme="dark"] #about {
-      background:#0a0f1f !important;
-      border-top: 1px solid rgba(255,255,255,0.04);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
+    /* section backgrounds */
+    section { background: var(--bg); }
+    [data-theme="dark"] section { border-bottom: 1px solid rgba(0,51,204,0.22) !important; background:#0a0f1f; }
 
     /* nav + links */
     nav, footer{ background:none; color:var(--text); font-family:'Comic Neue', cursive; font-size:1.1rem; font-weight:700 }
@@ -82,70 +72,60 @@
     .contact-links{ font-size:18px; margin:10px; color: var(--brand-red); text-decoration:none }
     .contact-links:hover{ text-decoration:underline }
 
-    /* navbar glass + toggler */
+    /* navbar */
     .navbar.glassy { position: sticky; top: 0; z-index: 1100; border-radius: 14px; margin: 10px; backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%); }
     .navbar-dark .navbar-toggler { border-color: rgba(255,255,255,.25); }
     .navbar-dark .navbar-toggler-icon { background-image: var(--bs-navbar-toggler-icon-bg, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")); }
     .navbar-light .navbar-toggler { border-color: rgba(0,0,0,.2); }
     .navbar-light .navbar-toggler-icon { background-image: var(--bs-navbar-toggler-icon-bg, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")); }
 
-    /* big header theme pill */
     .icon-btn { border: none; background: transparent; padding: 8px 10px; border-radius: 10px; transition: background-color .2s ease, transform .15s ease; cursor: pointer; }
     .icon-btn:hover { background: rgba(255,255,255,.06); transform: translateY(-2px); }
     .navbar .theme-big{ display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:9999px; background: var(--brand-red); color:#fff; font-weight:800; box-shadow: var(--shadow); }
-    .navbar .theme-big:hover{ filter:brightness(1.06); transform: translateY(-1px); }
-    #themeIcon{ font-size: 1.2rem; }
 
-    /* hero */
+    /* hero (image left, text+terminal tilt as group) */
     .hero{
-      position: relative;
+      display:grid;
+      grid-template-columns: 340px 1fr;
+      gap:28px;
+      align-items:center;
+      padding:80px 40px;
+      color:#fff;
+      position:relative;
       background: radial-gradient(1200px 600px at 20% 20%, color-mix(in srgb, var(--brand-red) 45%, transparent), transparent 60%),
                   linear-gradient(135deg, #1a1a1a, var(--black));
-      color:#fff; padding:80px 40px; display:flex; align-items:center; gap: 28px;
-      box-shadow: var(--shadow);
       border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;
-      overflow: hidden;
+      box-shadow: var(--shadow);
+      perspective:1000px;
+      overflow:hidden;
     }
-    .hero::before{$1background: radial-gradient(closest-side, rgba(0,51,204,.70), rgba(0,51,204,.28), transparent 62%);
-      filter: blur(24px); opacity:.9; animation: blobMorph 14s ease-in-out infinite;
-      border-radius: 38% 62% 45% 55% / 55% 35% 65% 45%; z-index:0;
-    }
-    @keyframes blobMorph {
-      0% { transform: translate(0,0) scale(1); }
-      33% { transform: translate(40px,-20px) scale(1.08); }
-      66% { transform: translate(-30px,40px) scale(0.95); }
-      100% { transform: translate(0,0) scale(1); }
-    }
-    .hero::after{$1background: radial-gradient(closest-side, rgba(0,51,204,.75), rgba(0,51,204,.32), transparent 70%);
-      filter: blur(34px); opacity:1; animation: blobMorphRight 18s ease-in-out infinite reverse;
-      border-radius: 55% 45% 62% 38% / 45% 60% 40% 55%; z-index:0;
-    }
-    @keyframes blobMorphRight { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(-30px,25px) scale(1.06); } 100% { transform: translate(0,0) scale(1); } }
-    .hero h1{ font-size: clamp(2.2rem, 4.2vw, 3.2rem); font-weight:800; color:#fff; position:relative; z-index:1; }
-    .hero h1::after{$1background: radial-gradient(circle, rgba(0,51,204,.62), rgba(0,51,204,.22), transparent 70%); filter: blur(22px); opacity:.9; pointer-events:none; }
-    .hero img{ width:340px; max-width:40vw; border-radius:14px; object-fit:cover; border: 8px solid var(--card); box-shadow: 0 10px 24px rgba(0,0,0,.35); position: relative; z-index:1; }
-    .hero .text-content p{ color:#f1f5f9; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+    @media (max-width: 992px){ .hero{ grid-template-columns: 1fr; text-align:center; } .hero > img{ margin: 0 auto 16px auto; } }
+    .hero > img{ width:340px; max-width:40vw; border-radius:14px; object-fit:cover; border: 8px solid var(--card); box-shadow: 0 10px 24px rgba(0,0,0,.35); position: relative; z-index:1; transform: none !important; }
 
-    /* glass */
+    .hero::before, .hero::after{ content:""; position:absolute; inset:0; pointer-events:none; }
+    .hero::before{ background: radial-gradient(closest-side, rgba(0,51,204,.70), rgba(0,51,204,.28), transparent 62%); filter: blur(24px); opacity:.45; }
+    .hero::after{ background: radial-gradient(closest-side, rgba(0,51,204,.75), rgba(0,51,204,.32), transparent 70%); filter: blur(34px); opacity:.35; }
+
+    .hero h1{ position:relative; overflow:hidden; font-size: clamp(2.2rem, 4.2vw, 3.2rem); font-weight:800; color:#fff; z-index:1; transition: transform .25s ease; animation: heroGlow 6s ease-in-out infinite alternate; }
+    .hero h1:hover{ transform: scale(1.015); }
+    .hero h1::after{ content:""; position:absolute; left:0; bottom:-6px; width:100%; height:3px; background: linear-gradient(90deg, transparent, var(--brand-red-2), transparent); transform:translateX(-100%); transition: transform .8s ease; }
+    .hero h1:hover::after{ transform:translateX(100%); }
+
     .glass { backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
       background: linear-gradient(180deg, var(--card), var(--card-2)); border: 1px solid rgba(255,255,255,.18); }
-    .glass-dark {$1background: radial-gradient(800px 400px at 10% 10%, rgba(0,51,204,.20), transparent 60%), linear-gradient(180deg, rgba(20,20,20,.78), rgba(10,10,10,.58)); border: 1px solid rgba(255,255,255,.06); }
+    .glass-dark { background: radial-gradient(800px 400px at 10% 10%, rgba(0,51,204,.20), transparent 60%), linear-gradient(180deg, rgba(20,20,20,.78), rgba(10,10,10,.58)); border: 1px solid rgba(255,255,255,.06); }
 
-    /* experience band */
     .experience-section{ background: var(--black) !important; color:#fff; padding:30px; border-radius:14px; border:1px solid rgba(255,255,255,.08); }
 
-    /* skills */
-    .skill-icon { text-align:center; margin:14px; padding:20px; border-radius:14px; background: linear-gradient(135deg, var(--card), var(--card-2)); box-shadow: var(--shadow);
-      transition: transform .28s ease, box-shadow .28s ease, outline-color .28s ease; outline: 2px solid transparent; position: relative; overflow: hidden; }
+    /* skill cards */
+    .skill-icon{ transform-style: preserve-3d; perspective: 800px; text-align:center; margin:14px; padding:20px; border-radius:14px; background: linear-gradient(135deg, var(--card), var(--card-2)); box-shadow: var(--shadow); transition: transform .28s ease, box-shadow .28s ease, outline-color .28s ease; outline: 2px solid transparent; position: relative; overflow: hidden; }
     .skill-icon::after{ content: ""; position: absolute; inset: -100% 0 auto; height: 60%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent); transform: translateY(-100%); transition: transform .6s ease; pointer-events:none; }
     .skill-icon:hover{ transform: translateY(-6px); box-shadow: 0 0 22px rgba(0,51,204,0.55) !important; outline-color: var(--brand-red) !important; }
     .skill-icon:hover::after{ transform: translateY(80%); }
     .skill-icon img{ height:64px; width:auto; object-fit:contain; transition: transform .25s ease; }
     .skill-icon h5{ font-size:.88rem; margin-top:10px; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important; text-transform:uppercase; letter-spacing:.8px; font-weight:600; }
 
-    /* projects */
-    #projects { background: var(--bg) !important; padding-top: 5rem; padding-bottom: 4rem; }
-    [data-theme="dark"] #projects { background: #0a0f1f !important; }
+    #projects { padding-top: 5rem; padding-bottom: 4rem; }
     .project-card{ position:relative; background: rgba(0,0,0,0.55) !important; backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
       border-radius: 14px; border: 1px solid rgba(0,51,204,0.18); box-shadow: 0 0 18px rgba(0,51,204,0.18); padding: 24px; margin-bottom:24px; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; overflow:hidden; }
     .project-card::before{ content:""; position:absolute; inset:0; background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.18), transparent 60%); opacity:0; transition: opacity .3s ease; pointer-events:none; }
@@ -154,73 +134,56 @@
     .project-card h3{ position:relative; padding-left:14px; text-align:left !important; font-family:"SFMono-Regular", Consolas, monospace; text-transform:uppercase; font-size:1rem; letter-spacing:.8px; margin-bottom:12px; }
     .project-card h3::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: var(--brand-red); border-radius:2px; }
 
-    /* certs */
     .cert-card{ position: relative; overflow:hidden; border-radius:14px !important; background: linear-gradient(135deg,#fef9ff,#e8ecff); padding: 24px; box-shadow: var(--shadow); transition: transform .28s ease, box-shadow .28s ease !important; }
     .cert-card:hover{ transform: translateY(-8px) !important; box-shadow: 0 18px 34px rgba(0,0,0,.35) !important; }
     [data-theme="dark"] .cert-card{ background: linear-gradient(135deg, rgba(34,34,40,.88), rgba(20,20,26,.78)); border: 1px solid rgba(255,255,255,.06); }
     [data-theme="dark"] .cert-card h5, [data-theme="dark"] .cert-card p, [data-theme="dark"] .cert-card a{ color:#f5f7ff !important; }
     [data-theme="dark"] .cert-card .text-body-secondary{ color:#cfd5ff !important; }
 
-    /* experience accordion overrides (contrast) */
     [data-theme="dark"] .accordion-button{ background:#0d0d0d; color:#fff; }
     [data-theme="dark"] .accordion-body{ background:#0a0f1f; color:#fff; }
 
-    /* footer */
     footer{ text-align:center; position:relative; bottom:0; width:100%; padding:10px 0 }
-    [data-theme="light"] footer h2, [data-theme="light"] footer p, [data-theme="light"] footer a{ color:#0c0c0c !important; }
 
-    /* animated linux prompt background */
     .animated-linux-bg { position: fixed; inset: 0; background: repeating-linear-gradient(180deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 18px), repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 18px); background-size: 100% 100%; z-index:-2; opacity:.08; animation: terminalScroll 20s linear infinite; }
     @keyframes terminalScroll { 0% { background-position: 0 0, 0 0; } 100% { background-position: 0 100%, 100% 0; } }
 
-    /* theme FAB (bottom-right) */
     .theme-fab{ display:none !important; }
-    .theme-fab:active{ transform: scale(.98); }
-    /* Always blinking red cursor */
-  #term-input {
-    caret-color: var(--brand-red) !important;
-    animation: cursorBlink 1.1s steps(1) infinite;
-  }
-  @keyframes cursorBlink {
-    0%, 50% { caret-color: var(--brand-red); }
-    51%, 100% { caret-color: transparent; }
-  }
-  /* Block-style blinking cursor */
-  #block-cursor{
-    width:10px;
-    height:1.2em;
-    background: var(--brand-red);
-    animation: cursorBlink 1s steps(1) infinite;
-    display:inline-block;
-    margin-left:2px;
-  }
-[data-theme="dark"] #infolob-role{background:#0a0f1f !important;color:#fff !important;border:1px solid rgba(255,255,255,.12)!important;} 
-/* Zabbix logo size tweak */
-  .skill-icon img[alt="Zabbix"]{ height:44px !important; width:auto !important; }
-/* ===== Scroll reveal (sections fade/slide in) ===== */
-  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.reveal-in{ opacity:1; transform: translateY(0); }
-  @media (prefers-reduced-motion: reduce){
-    .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
-  }
-/* ===== Scroll reveal (sections fade/slide in) ===== */
-  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.reveal-in{ opacity:1; transform: translateY(0); }
-  /* Staggered children inside a revealed section */
-  .stagger > *{ opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal.reveal-in .stagger > *{ opacity:1; transform:none; }
-  .reveal.reveal-in .stagger > *{ transition-delay: calc(var(--i, 0) * 90ms); }
-  @media (prefers-reduced-motion: reduce){
-    .reveal, .stagger > *{ opacity:1 !important; transform:none !important; transition:none !important; }
-  }
-</style>
+
+    /* terminal cursor */
+    #term-input { caret-color: var(--brand-red) !important; }
+    #block-cursor{ width:10px; height:1.2em; background: var(--brand-red); animation: cursorBlink 1s steps(1) infinite; display:inline-block; margin-left:2px; }
+    @keyframes cursorBlink { 0%, 50% { opacity:1; } 51%, 100% { opacity:.15; } }
+
+    [data-theme="dark"] #infolob-role{background:#0a0f1f !important;color:#fff !important;border:1px solid rgba(255,255,255,.12)!important;}
+    .skill-icon img[alt="Zabbix"]{ height:44px !important; width:auto !important; }
+
+    /* Scroll reveal */
+    .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.reveal-in{ opacity:1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1 !important; transform:none !important; transition:none !important; } }
+
+    /* Terminal chrome + macOS dots */
+    .terminal{ border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.42); box-shadow: 0 20px 60px rgba(0,0,0,.35); will-change: transform; transform-style: preserve-3d; }
+    .terminal .titlebar{ display:flex; align-items:center; gap:10px; padding:12px 14px; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border-bottom:1px solid rgba(255,255,255,.08); }
+    .terminal .titlebar .dot{ width:12px; height:12px; border-radius:50%; display:inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
+    .terminal .titlebar .dot.red{ background:#ff5f57; }
+    .terminal .titlebar .dot.yellow{ background:#fdbc2e; }
+    .terminal .titlebar .dot.green{ background:#28c840; }
+
+    /* terminal width */
+    .hero .terminal{ width:min(92vw, 640px); max-width:640px; font-size:.95rem; }
+
+    /* hero tilt container */
+    .hero-tilt{ transform-style: preserve-3d; transition: transform .12s ease-out; }
+  </style>
 </head>
 <body>
   <div class="animated-linux-bg"></div>
   <div id="progressBar"></div>
   <div class="doodle"></div>
 
-  <!-- Navbar (no brand label, big theme button) -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg glass glassy">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -253,14 +216,13 @@
     <!-- Hero -->
     <section id="home" class="hero mt-2 glass-dark">
       <img src="profile.jpg" alt="Profile Picture" />
-      <div class="text-content">
-        <h1 class="fw-bold shimmer-on-hover">Syed Farshaaz Ahmed</h1>
-        <p class="section-description text-white mb-1">Associate Cloud Consultant</p>
+      <div class="text-content hero-tilt">
+        <h1 id="heroName" class="fw-bold shimmer-on-hover">Syed Farshaaz Ahmed</h1>
+        <p id="heroSub" class="section-description text-white mb-1">Associate Cloud Consultant</p>
         <div class="mt-3">
           <div class="terminal glass" id="terminal">
             <div class="titlebar">
               <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-              <span class="ms-2 fw-semibold">terminal — syed@portfolio</span>
             </div>
             <div class="d-flex" style="gap:8px; padding:8px 12px; border-top:1px solid rgba(255,255,255,.08); font-size:.85rem; opacity:.85;">💡 try: <code>help</code> / <code>terraform</code> / <code>azure</code> / <code>net</code> / <code>uptime</code> / <code>clear</code></div>
             <div class="d-flex" style="gap:8px; padding:8px 12px;"><span class="text-danger">$</span>&nbsp;<span id="demo-line"></span></div>
@@ -272,7 +234,7 @@
     </section>
 
     <!-- About (after hero) -->
-    <section id="about" class="reveal" class="mt-4 pt-4">
+    <section id="about" class="reveal mt-4 pt-4">
       <div class="container">
         <h2 class="text-center fw-bold section-header">About</h2>
         <div class="row justify-content-center">
@@ -288,9 +250,9 @@
     </section>
 
     <!-- Technical Skills -->
-    <section id="technical-skills" class="reveal" class="mt-5 pt-5">
+    <section id="technical-skills" class="reveal mt-5 pt-5">
       <h2 class="text-center fw-bold section-header">Technical Skills</h2>
-      <div class="row mt-3 justify-content-center stagger">
+      <div class="row mt-3 justify-content-center">
         <div class="col-auto skill-icon"><img src="https://icon.icepanel.io/Technology/png-shadow-512/Linux.png" alt="Linux" /><h5>Linux / RHEL</h5></div>
         <div class="col-auto skill-icon"><img src="https://www.svgrepo.com/show/354152/oracle.svg" alt="OCI" /><h5>Oracle Cloud (OCI)</h5></div>
         <div class="col-auto skill-icon"><img src="https://www.svgrepo.com/show/448274/azure.svg" alt="Azure" /><h5>Microsoft Azure</h5></div>
@@ -303,7 +265,7 @@
     </section>
 
     <!-- Certifications -->
-    <section id="certifications" class="reveal" class="mt-5 pt-5">
+    <section id="certifications" class="reveal mt-5 pt-5">
       <h2 class="text-center fw-bold section-header">Certifications</h2>
       <div class="row mt-4 justify-content-center text-center">
         <div class="col-md-4 mb-4"><div class="cert-card"><img src="https://www.svgrepo.com/show/354152/oracle.svg" alt="Oracle" style="width:50px; margin-bottom:10px;" /><h5 class="fw-bold">OCI 2025 Certified Architect Associate</h5><p class="mb-1 text-body-secondary">Oracle · Credential ID: 100690517OCI25CAA</p><a class="stretched-link" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=8F032D67DE344AE180E0941422BCAFB157626841D376576274E5585075D330C9" target="_blank" rel="noopener">View Credential →</a></div></div>
@@ -313,9 +275,9 @@
     </section>
 
     <!-- Experience -->
-    <section id="professional-experience" class="reveal" class="mt-5 pt-5 experience-section">
+    <section id="professional-experience" class="reveal mt-5 pt-5 experience-section">
       <h2 class="text-center fw-bold section-header">Professional Experience</h2>
-      <div class="row mt-3 stagger">
+      <div class="row mt-3">
         <div class="col-md-12">
           <div class="accordion" id="accordionExample">
             <div class="accordion-item">
@@ -372,7 +334,7 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="reveal" class="mt-5 pt-5">
+    <section id="projects" class="reveal mt-5 pt-5">
       <h2 class="text-center fw-bold section-header">Highlighted Work</h2>
       <div class="row mt-3">
         <div class="col-md-6"><div class="project-card p-3"><h3 class="text-center">OCI Operations & Uptime</h3><p class="text-center">Implemented incident handling, patching windows, and monitoring dashboards (Zabbix/Grafana) to improve stability and reduce MTTR.</p></div></div>
@@ -387,13 +349,13 @@
     <p class="text-center">Connect: <a class="contact-links" href="mailto:syedfarshaazahmed@gmail.com"><i class="fa-solid fa-envelope"></i> syedfarshaazahmed@gmail.com</a> <span> | </span> <a class="contact-links" href="tel:+917981329741"><i class="fa-solid fa-phone"></i> 7981329741</a> <span> | </span> <a class="contact-links" href="https://www.linkedin.com/in/syed-farshaaz-ahmed-b0365121b" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></p>
   </footer>
 
-  <!-- Big floating theme toggle (optional duplicate control) -->
+  <!-- Optional big theme toggle (hidden) -->
   <button id="bigThemeBtn" class="theme-fab" title="Toggle theme"><i id="bigThemeIcon" class="fa-solid fa-sun"></i><span id="bigThemeLabel">Dark</span></button>
 
   <!-- JS libs -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- App JS: theme, spotlight, progress bar -->
+  <!-- App JS: theme, tilt, spotlight, progress bar -->
   <script>
     (function(){
       const root = document.documentElement;
@@ -419,18 +381,60 @@
       }
       function toggleTheme(){ const cur = root.getAttribute('data-theme') || 'dark'; applyTheme(cur === 'dark' ? 'light' : 'dark'); }
 
-      // init from saved
       applyTheme((()=>{ try{ return localStorage.getItem('theme') || 'dark'; } catch(e){ return 'dark'; } })());
 
-      // bind controls
       smallBtn?.addEventListener('click', toggleTheme);
       smallIcon?.addEventListener('click', toggleTheme);
       bigBtn?.addEventListener('click', toggleTheme);
-      // removed global 'T' key theme shortcut — toggle only via header button });
 
-      // spotlight follow-cursor (projects, skills, certs)
-      const targets = document.querySelectorAll('.project-card, .skill-icon, .cert-card');
-      targets.forEach(el => {
+      // 3D tilt for skills
+      document.querySelectorAll('.skill-icon').forEach(el=>{
+        el.addEventListener('pointermove', (e)=>{
+          const r = el.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          const tiltX = (y * 8).toFixed(2);
+          const tiltY = (x * -8).toFixed(2);
+          el.style.transform = `translateY(-6px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+        el.addEventListener('pointerleave', ()=>{ el.style.transform = ''; });
+      });
+
+      // 3D tilt for terminal
+      const termPanel = document.getElementById('terminal');
+      if(termPanel){
+        termPanel.addEventListener('pointermove', (e)=>{
+          const r = termPanel.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          const max = 5;
+          termPanel.style.transform = `rotateX(${(y*max).toFixed(2)}deg) rotateY(${(-x*max).toFixed(2)}deg)`;
+        });
+        termPanel.addEventListener('pointerleave', ()=>{ termPanel.style.transform = ''; });
+      }
+
+      // hero text-group tilt (exact ref feel)
+      const hero = document.getElementById('home') || document.querySelector('.hero');
+      const heroTilt = document.querySelector('.hero-tilt');
+      if(hero && heroTilt){
+        const isTouch = window.matchMedia('(pointer: coarse)').matches;
+        if(!isTouch){
+          let bounds; const max=6; // degrees
+          function updateBounds(){ bounds = hero.getBoundingClientRect(); }
+          window.addEventListener('resize', updateBounds); updateBounds();
+          hero.addEventListener('mousemove', (e)=>{
+            const x = (e.clientX - bounds.left) / bounds.width;
+            const y = (e.clientY - bounds.top) / bounds.height;
+            const rotY = (x - 0.5) * max * 2;
+            const rotX = (0.5 - y) * max * 2;
+            heroTilt.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+          });
+          hero.addEventListener('mouseleave', ()=>{ heroTilt.style.transform = 'rotateX(0deg) rotateY(0deg)'; });
+        }
+      }
+
+      // spotlight follow-cursor (projects)
+      document.querySelectorAll('.project-card, .cert-card').forEach(el => {
         el.addEventListener('pointermove', (e) => {
           const r = el.getBoundingClientRect();
           const x = ((e.clientX - r.left) / r.width) * 100;
@@ -454,9 +458,10 @@
       // footer year
       const yearEl = document.getElementById('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
 
-      // --- tiny self-tests ---
+      // --- self-tests ---
       console.assert(document.getElementById('themeToggle'), 'Theme toggle button missing');
       console.assert(document.getElementById('terminal'), 'Terminal block missing');
+      console.assert(document.querySelector('.hero-tilt'), 'Hero tilt wrapper missing');
     })();
   </script>
 
@@ -465,11 +470,6 @@
     (function(){
       const sections = document.querySelectorAll('section.reveal');
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      // index stagger containers
-      document.querySelectorAll('.stagger').forEach(group=>{
-        const kids = Array.from(group.children).filter(el=>el.classList.contains('col') || el.className.includes('col-') || el.classList.contains('skill-icon') || el.classList.contains('project-card'));
-        kids.forEach((el,i)=> el.style.setProperty('--i', i));
-      });
       if(prefersReduced){ sections.forEach(s=>s.classList.add('reveal-in')); return; }
       const io = new IntersectionObserver((entries)=>{
         entries.forEach(entry=>{
@@ -487,62 +487,5 @@
       const termIn  = document.getElementById('term-input');
       const demoEl  = document.getElementById('demo-line');
       if(!(termOut && termIn && demoEl)) return;
-      // ensure input is focusable and focused
       termIn.setAttribute('autofocus','autofocus');
-      try { termIn.focus(); } catch(e) {}
-      document.getElementById('terminal').addEventListener('click', ()=>{ try{ termIn.focus(); }catch(e){} });
-
-      const start = Date.now();
-      const pad = (n)=> String(n).padStart(2,'0');
-      const uptimeStr = ()=>{ const s=Math.floor((Date.now()-start)/1000); const hh=pad(Math.floor(s/3600)); const mm=pad(Math.floor((s%3600)/60)); const ss=pad(s%60); return `${hh}:${mm}:${ss}`; };
-
-      const demoCmds = [ ()=>`terraform plan -refresh=false`, ()=>`az vm list -o table`, ()=>`az network vnet list -o table`, ()=>`ip -br addr`, ()=>`ip route`, ()=>`terraform fmt -check`, ()=>`az account show --query user.name` ];
-      let idx=0, paused=false, mode='type', cursor=0, text='';
-      function tick(){
-        if(!paused){
-          if(mode==='type'){
-            if(cursor===0){ text = demoCmds[idx % demoCmds.length](); }
-            cursor++; demoEl.textContent = text.slice(0,cursor);
-            if(cursor>=text.length){ mode='hold'; setTimeout(()=>{ mode='erase'; }, 900); }
-          } else if(mode==='erase'){
-            cursor--; demoEl.textContent = text.slice(0, Math.max(0,cursor));
-            if(cursor<=0){ mode='type'; idx++; }
-          }
-        }
-        const base = mode==='erase'?16:28;
-        const jitter = Math.random()*12; // subtle latency
-        setTimeout(tick, base + jitter);
-      }
-      tick();
-
-      function print(html){ const d=document.createElement('div'); d.innerHTML=html; termOut.appendChild(d); termOut.scrollTop=termOut.scrollHeight; }
-
-      const commands = {
-        help(){ print('available: <code>help</code>, <code>terraform</code>, <code>azure</code>, <code>net</code>, <code>uptime</code>, <code>theme</code>, <code>clear</code>'); },
-        terraform(){ print(`<pre><code>Terraform v1.6.6\nInitializing the backend...\nPlan: 2 to add, 0 to change, 0 to destroy.\n  + oci_core_vcn.main\n  + oci_core_instance.web[0]</code></pre>`); },
-        azure(){ print(`<pre><code>$ az vm list -o table\nName         ResourceGroup   Location   PowerState\nweb-01       prod-rg         eastus     VM running\nbastion-01   net-rg          eastus     VM deallocated</code></pre>`); },
-        net(){ print(`<pre><code>$ ip -br addr\neth0    UP   10.0.1.10/24\nlo      UP   127.0.0.1/8\n\n$ ip route\ndefault via 10.0.1.1 dev eth0\n10.0.1.0/24 dev eth0 proto kernel scope link src 10.0.1.10</code></pre>`); },
-        uptime(){ print(`uptime: <strong>${uptimeStr()}</strong>`); },
-        theme(){ document.getElementById('themeToggle')?.click(); print('theme toggled'); },
-        clear(){ termOut.innerHTML=''; }
-      };
-
-      let resumeT=null;
-      const pause=()=>{ paused=true; if(resumeT) clearTimeout(resumeT); };
-      const resume=()=>{ paused=false; };
-
-      termIn.addEventListener('keydown', (e)=>{
-        if(e.key==='Enter'){
-          const raw = termIn.value.trim(); if(!raw) return;
-          pause();
-          print(`<span class='text-danger'>$</span> ${raw}`);
-          const [cmd, ...rest] = raw.split(' ');
-          (commands[cmd]?.(rest.join(' '))) ?? print(`command not found: <code>${cmd}</code>`);
-          termIn.value='';
-          resumeT = setTimeout(resume, 6000);
-        } else { pause(); resumeT = setTimeout(resume, 6000); }
-      });
-    })();
-  </script>
-</body>
-</html>
+      try { termIn
